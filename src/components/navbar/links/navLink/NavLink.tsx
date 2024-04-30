@@ -1,7 +1,11 @@
+"use client";
 import Link from "next/link";
+import { ILinks } from "../Links";
 import styles from "./navLink.module.css";
+import { usePathname } from "next/navigation";
 
-const NavLink = ({ item }) => {
+const NavLink = ({ item }: { item: ILinks }) => {
+  const pathName = usePathname();
 
   return (
     <Link

@@ -1,7 +1,7 @@
-import Link from "next/link";
 import styles from "./links.module.css";
+import NavLink from "./navLink/NavLink";
 
-interface ILinks {
+export interface ILinks {
   title: string;
   path: string;
 }
@@ -25,13 +25,25 @@ const links: ILinks[] = [
   },
 ];
 
+const session = true;
+const iaAdmin = true;
+
 const Links = () => {
   return (
     <div className={styles.container}>
       <div className={styles.links}>
         {links.map((link: ILinks, i: number) => {
-          return <Link href={link.path}>{link.title}</Link>;
+          return <NavLink item={link} />;
         })}
+
+        {session ? (
+          <>
+            {iaAdmin && <NavLink item={{ path: "/admin", title: "Admin" }} />}
+            <button>Logout</button>
+          </>
+        ) : (
+          <NavLink item={{ path: "/login", title: "Login" }} />
+        )}
       </div>
     </div>
   );
